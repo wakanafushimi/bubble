@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,22 +20,34 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg">
+<body>
+	<c:set var="count" value="1"/>
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-lg-4 col-11 loginitem justify-content-center">
-				<div class="imgcontainer">
-					<img src="images/logo.jpg">
-				</div>
-				<a class="centertext mt-2 d-block" href="signin.jsp">初めての方はこちら</a>
-				<form action="LoginServlet" method="get" class="m-3">
-					<input type="text" class="form-control" placeholder="ユーザネーム"
-						name="username">
-					<div class="centertext">
-						<button type="submit" class="btn btn-warning my-2">START</button>
+			<div class="col-lg-6 loginitem p-3">
+				<a href="game.jsp" class="small d-block mb-2">←戻る</a>
+				<c:forEach var="rank" items="${sortedEntries}">
+					<div class="row">
+						<p class="col-4 ps-4">
+							
+							<c:out value="${count}" />
+							位
+						</p>
+						<p class="col-3">
+							<c:out value="${rank.key}" />
+							さん
+						</p>
+						<p class="col-4">
+							<c:out value="${rank.value.max}" />
+							点
+							<c:set var="score" value="${rank.value.max}" />
+							<c:if test="${score ne prescore}">
+								<c:set var="count" value="${count+1}"/>
+							</c:if>
+							<c:set var="prescore" value="${rank.value.max}" />
+						</p>
 					</div>
-				</form>
-				
+				</c:forEach>
 			</div>
 		</div>
 	</div>

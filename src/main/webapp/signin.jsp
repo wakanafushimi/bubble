@@ -28,15 +28,9 @@
 				</div>
 				<h2 class="centertext">プレーヤー登録</h2>
 
-				<form action="LoginServlet" method="post" class="p-4 mt-3">
-					<div>
-						<label class="form-label">ユーザネーム</label> <input type="text"
-							name="username" class="form-control">
-					</div>
-					<div>
-						<label class="form-label">パスワード</label> <input type="password"
-							name="password" class="form-control">
-					</div>
+				<form action="LoginServlet" method="post" class="m-3">
+					<input type="text" name="username" placeholder="ユーザネーム"
+						class="form-control">
 					<div class="my-2 centertext">
 						<div>
 							<input type="submit" value="START" class="btn btn-warning">

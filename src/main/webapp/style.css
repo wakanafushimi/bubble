@@ -24,7 +24,7 @@ body::before{
 }
 .loginitem{
 	background-color:#f3f4ee;
-	margin-top:10vh;
+	margin-top:15vh;
 }
 h1{
 	text-align:center;
@@ -47,5 +47,33 @@ img{
 }
 .info{
 	background-color:#f3f4ee;
-	width:100vw;
+	padding-top:10px;
 }
+@media(min-width:960px){
+	.info{
+		margin-left:50px;
+		margin-top:20px;
+	}
+	.infop{
+		margin-top:30px;
+	}
+	.sinkacontainer{
+		margin-top:10px;
+	}
+}
+.next-bubble{
+	margin:0 auto;
+}
+.failmessage{
+	background-color:#f3f4ee;
+	margin:30vh 10px 0 10px;
+	padding:5px 0;
+}
+a{
+	text-decoration:none;
+	color:#333;
+}
+.small{
+	font-size:0.8rem;
+}
+

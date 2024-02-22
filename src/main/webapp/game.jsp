@@ -24,26 +24,33 @@
 </head>
 <body>
 	<div class="main">
-		<div class="message"></div>
+		<div class="message pb-3"></div>
 
 		<div class="container-fluid">
-			<div class="row info">
-				<div class="nextcontainer col-4">
-					<p>next:</p>
-					<div class="next"></div>
-				</div>
-				<div class="score-container col-4">
-					<p class="score"></p>
-				</div>
-				<div class="sinkacontainer col-4">
-					<p>進化の輪</p>
-					<img src="images/sikanowa02.png">
-				</div>
-			</div>
 			<div class="row">
-				<div class="ms-1">
-					<div class="gamebox centertext"></div>
+				<div class="col-lg-2 col-12 info">
+					<div class="row">
+						<div class="nextcontainer col-4 col-lg-12 infop">
+							<p class="my-1 centertext">next</p>
+							<div class="next"></div>
+						</div>
+						<div class="score-container col-4 col-lg-12 infop">
+							<p class="score my-1 centertext"></p>
+						</div>
+						<div class="col-4 col-lg-12 centertext infop">
+							<p class="my-1">進化の輪</p>
+							<div class="sinkacontainer mx-auto">
+								<img src="images/sikanowa02.png" class="my-1">
+							</div>
+						</div>
+					</div>
 				</div>
+				<div class="col-lg-7 mt-5">
+					<div class="ms-1">
+						<div class="gamebox centertext"></div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +38,7 @@ public class ScoreServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -45,20 +46,21 @@ public class ScoreServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().append("Served at:").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		String scorestr=request.getParameter("data");
 		int score=Integer.parseInt(scorestr);
 
 		HttpSession session=request.getSession();
-		int day = 24 * 60 * 60;
-		session.setMaxInactiveInterval(day);
+		int month = 30 * 24 * 60 * 60;
+		session.setMaxInactiveInterval(month);
 
 		String username=(String)session.getAttribute("username");
 
 		Map<String,Userscore> scoremap=new HashMap<String,Userscore>();
 
-		if((Map<String,Userscore>)session.getAttribute("scoremap")!=null) {
-			scoremap=(Map<String,Userscore>)session.getAttribute("scoremap");
+		if((Map<String,Userscore>)session.getAttribute("sortedScoremap")!=null) {
+			scoremap=(Map<String,Userscore>)session.getAttribute("sortedScoremap");
 		}
 
 		Userscore userscore = scoremap.getOrDefault(username, new Userscore(username));
@@ -76,16 +78,25 @@ public class ScoreServlet extends HttpServlet {
 			}
 		});
 
+		System.out.println("ランキング1");
 		Map<String,Userscore> sortedScoremap=new HashMap<>();
 		for (Map.Entry<String, Userscore> entry : sortedEntries) {
 			sortedScoremap.put(entry.getKey(), entry.getValue());
 			System.out.println(entry.getKey()+"さん:"+entry.getValue().getMax()+"点");
 		}
 
-		session.setAttribute("scoremap", sortedScoremap);
-
-
-
+		session.setAttribute("sortedScoremap",sortedScoremap);
+		session.setAttribute("sortedEntries", sortedEntries);
+		
+		System.out.println("ランキング2");
+		for (Map.Entry<String, Userscore> entry : sortedEntries) {
+		    String name = entry.getKey();
+		    System.out.println(name + "さん" + entry.getValue().getMax() + "点");
+		}
+		
+		RequestDispatcher dispatcher=request.getRequestDispatcher("ranking.jsp");
+		dispatcher.forward(request,response);
+		
 	}
 
 }

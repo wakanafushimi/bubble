@@ -1,10 +1,15 @@
+function gate() {
+	var UserInput = prompt("パスワードを入力して下さい:","");
+    location.href = UserInput + ".jsp";
+}
+
 //import
 const { Bodies, Body, Composite, Engine, Events, Render, Runner, Sleeping } =Matter;
 
 const width = 350;
 const height = 450;
 const wall_t = 10;
-const deadline = 100; // ゲームオーバーになる高さ
+const deadline = 430; // ゲームオーバーになる高さ
 const friction = 0.3; // 摩擦
 const mass = 1; // 重量
 const max_level = 11;
@@ -141,26 +146,6 @@ class bubbleGame {
     this.start(this);
   }
 
-	showReadyMessage() {
-	  console.log("showReadyMessage呼ばれた");
-	  const p = document.createElement("p");
-	  p.classList.add("mainText");
-      p.textContent = "バブルゲーム";
-      const p2 = document.createElement("p");
-      p2.classList.add("subText");
-      p2.textContent = "バブルを大きくしよう";
-      
-      const button = document.createElement("button");
-      button.setAttribute("type", "button");
-      button.classList.add("button");
-      button.addEventListener("click", this.start.bind(this));
-      button.innerText = "ゲストとしてゲーム開始";
-      message.appendChild(p);
-      message.appendChild(p2);
-      message.appendChild(button);
-      message.style.display = "block";
-    }
-
   start(arg) {
     //arg.stopPropagation();  //更新時に1個落ちちゃうのを防ぐ
     if (this.gameStatus === "ready") {
@@ -191,7 +176,7 @@ class bubbleGame {
       return;
     }
     this.level1 = Math.floor(Math.random() * 5);
-    const radius = this.level2 * 10 + 20;
+    const radius = this.level2 * 8 + 8;
     const currentbubble = Bodies.circle(this.defaultX, 30, radius, {
       isSleeping: true, //static(固定)にする
       label: "bubble_" + this.level2,
@@ -214,8 +199,9 @@ class bubbleGame {
     const nextBubblegamebox = document.querySelector(".next");
     const nextBubbleElement = document.createElement("div");
     nextBubbleElement.classList.add("next-bubble");
-    nextBubbleElement.style.width = "80px";
-    nextBubbleElement.style.height = "80px";
+    nextBubbleElement.classList.add("mt-4");
+    nextBubbleElement.style.width = "60px";
+    nextBubbleElement.style.height = "60px";
     nextBubbleElement.style.backgroundImage = `url(${nextbubble_bg[this.level1]})`;
     nextBubbleElement.style.backgroundRepeat="no-repeat"
     this.level2=this.level1
@@ -246,44 +232,38 @@ class bubbleGame {
   showGameOverMessage() {
     this.valArray.push(this.val)
     
-    
     //Javaに送信
     var data = this.val;
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "ScoreServlet", true);
+	xhr.open("POST","ScoreServlet", true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send("data=" + encodeURIComponent(data));
 
     
-    const p = document.createElement("p");
-    p.classList.add("mainText");
-    p.textContent = "Game Over";
+    const gameover = document.createElement("h2");
+    gameover.classList.add("pt-2");
+    gameover.textContent = "Game Over";
     
-    const p2 = document.createElement("p");
-    p2.classList.add("subText");
-    p2.textContent = `Score: ${this.val}`;
-   
-    const button = document.createElement("button");
-    button.setAttribute("type", "button");
-    button.classList.add("button");
-    button.addEventListener("click", this.restart.bind(this));
+    const button = document.createElement("a");
+    //button.setAttribute("type", "button");
+    //button.classList.add("mouichido");
+    //button.addEventListener("click", this.restart.bind(this));
+    button.href="game.jsp";
     button.innerText = "もう一度";
     
     const button2 = document.createElement("a");
     button2.href="ranking.jsp"
-    button2.innerText = "本日のランキングを見る";
+    button2.classList.add("btn-warning");
+    button2.classList.add("btn-sm");
+    button2.classList.add("btn");
+    button2.classList.add("ms-4");
+    button2.innerText = "本日のランキング";
     
-    const button3 = document.createElement("a");
-    button3.href="index.jsp"
-    button3.innerText = "signout";
-    
-    message.appendChild(p);
-    message.appendChild(p2);
+    message.appendChild(gameover);
     message.appendChild(button);
     message.appendChild(button2);
-    message.appendChild(button3);
     message.style.display = "block";
-    score.style.display="none"
+    //score.style.display="none"
   }
 
   resetMessage() {
@@ -327,7 +307,7 @@ class bubbleGame {
         const newLevel = currentbubbleLevel + 1;
         const newX = (bodyA.position.x + bodyB.position.x) / 2;
         const newY = (bodyA.position.y + bodyB.position.y) / 2;
-        const newRadius = newLevel * 10 + 20;
+        const newRadius = newLevel * 8 + 8;
         const newbubble = Bodies.circle(newX, newY, newRadius, {
           label: "bubble_" + newLevel,
           friction: friction,
@@ -354,7 +334,7 @@ class bubbleGame {
     }
     const { offsetX } = e;
     const currentbubbleRadius =
-      Number(this.currentbubble.label.substring(7)) * 10 + 20;
+      Number(this.currentbubble.label.substring(7)) * 8 + 8;
     const newX = Math.max(
       Math.min(offsetX, width - 10 - currentbubbleRadius),
       10 + currentbubbleRadius
@@ -368,7 +348,13 @@ class bubbleGame {
 
   setScore(val) {
     this.val = val;
-    score.replaceChildren(`Score: ${val}`);
+    
+    score.innerText=("score");
+    //score.appendChild(` ${val}`);
+    const scoreval = document.createElement("h2");
+    scoreval.classList.add("mt-3");
+    scoreval.innerText = `${val}`;
+    score.appendChild(scoreval);
   }
 }
 
