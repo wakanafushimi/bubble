@@ -1,12 +1,7 @@
-function gate() {
-	var UserInput = prompt("パスワードを入力して下さい:","");
-    location.href = UserInput + ".jsp";
-}
-
 //import
 const { Bodies, Body, Composite, Engine, Events, Render, Runner, Sleeping } =Matter;
 
-const width = 350;
+const width = 320;
 const height = 450;
 const wall_t = 10;
 const deadline = 430; // ゲームオーバーになる高さ
@@ -199,7 +194,7 @@ class bubbleGame {
     const nextBubblegamebox = document.querySelector(".next");
     const nextBubbleElement = document.createElement("div");
     nextBubbleElement.classList.add("next-bubble");
-    nextBubbleElement.classList.add("mt-4");
+    nextBubbleElement.classList.add("mt-2");
     nextBubbleElement.style.width = "60px";
     nextBubbleElement.style.height = "60px";
     nextBubbleElement.style.backgroundImage = `url(${nextbubble_bg[this.level1]})`;

@@ -28,16 +28,16 @@
 				<a href="game.jsp" class="small d-block mb-2">←戻る</a>
 				<c:forEach var="rank" items="${sortedEntries}">
 					<div class="row">
-						<p class="col-4 ps-4">
+						<p class="col-3 ps-4">
 							
 							<c:out value="${count}" />
 							位
 						</p>
-						<p class="col-3">
+						<p class="col-5">
 							<c:out value="${rank.key}" />
 							さん
 						</p>
-						<p class="col-4">
+						<p class="col-3">
 							<c:out value="${rank.value.max}" />
 							点
 							<c:set var="score" value="${rank.value.max}" />

@@ -20,23 +20,12 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body class="bg">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-4 col-11 loginitem justify-content-center">
-				<div class="imgcontainer">
-					<img src="images/logo.jpg">
-				</div>
-				<a class="centertext mt-2 d-block" href="signin.jsp">初めての方はこちら</a>
-				<form action="LoginServlet" method="get" class="m-3">
-					<input type="text" class="form-control" placeholder="ユーザネーム"
-						name="username">
-					<div class="centertext">
-						<button type="submit" class="btn btn-warning my-2">START</button>
-					</div>
-				</form>
-				
-			</div>
-		</div>
-	</div>
+<script type="text/javascript">
+   function gate() {
+      var UserInput = prompt("パスワードを入力して下さい:","");
+      location.href = UserInput + ".jsp";
+   }
+   window.onload=gate();
+</script>
 </body>
 </html>

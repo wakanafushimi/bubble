@@ -36,7 +36,7 @@
 							<input type="submit" value="START" class="btn btn-warning">
 						</div>
 						<div class="mt-4">
-							<a href="index.jsp">戻る</a>
+							<a href="hal.jsp">戻る</a>
 						</div>
 					</div>
 				</form>
