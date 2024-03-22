@@ -38,13 +38,13 @@
 							さん
 						</p>
 						<p class="col-3">
-							<c:out value="${rank.value.max}" />
+							<c:out value="${rank.value}" />
 							点
-							<c:set var="score" value="${rank.value.max}" />
+							<c:set var="score" value="${rank.value}" />
 							<c:if test="${score ne prescore}">
 								<c:set var="count" value="${count+1}"/>
 							</c:if>
-							<c:set var="prescore" value="${rank.value.max}" />
+							<c:set var="prescore" value="${rank.value}" />
 						</p>
 					</div>
 				</c:forEach>

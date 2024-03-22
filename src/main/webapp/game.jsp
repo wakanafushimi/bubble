@@ -24,7 +24,9 @@
 </head>
 <body>
 	<div class="main">
+		<form action="ScoreServlet" method="post">
 		<div class="message pb-3"></div>
+		</form>
 
 		<div class="container-fluid">
 			<div class="row">

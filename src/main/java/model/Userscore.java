@@ -1,34 +1,19 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class Userscore {
-	List<Integer> scores=new ArrayList<>();
 	String username;
+	int score;
 	
-	public Userscore(String username){
+	public Userscore(String username,int score){
 		this.username=username;
+		this.score=score;
 	}
-	
-	public void addscore(int score) {
-		scores.add(score);
-	}
-	
-	public void setScores(List<Integer> scores) {
-		this.scores = scores;
-	}
-	public List<Integer> getScores() {
-		return scores;
-	}
-	
-	public int getMax() {
-		return Collections.max(scores);
+	public int getScore() {
+		return this.score;
 	}
 	
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 	
 }

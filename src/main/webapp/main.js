@@ -5,6 +5,7 @@ const width = 320;
 const height = 450;
 const wall_t = 10;
 const deadline = 430; // ゲームオーバーになる高さ
+//430
 const friction = 0.3; // 摩擦
 const mass = 1; // 重量
 const max_level = 11;
@@ -230,7 +231,7 @@ class bubbleGame {
     //Javaに送信
     var data = this.val;
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST","ScoreServlet", true);
+	xhr.open("POST","RankServlet", true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send("data=" + encodeURIComponent(data));
 
@@ -247,12 +248,12 @@ class bubbleGame {
     button.innerText = "もう一度";
     
     const button2 = document.createElement("a");
-    button2.href="ranking.jsp"
+    button2.href="RankServlet"
     button2.classList.add("btn-warning");
     button2.classList.add("btn-sm");
     button2.classList.add("btn");
     button2.classList.add("ms-4");
-    button2.innerText = "本日のランキング";
+    button2.innerText = "ランキング";
     
     message.appendChild(gameover);
     message.appendChild(button);
